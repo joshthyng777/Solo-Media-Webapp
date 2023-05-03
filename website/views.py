@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Note, Weight
 from . import db
 import json
 
@@ -10,19 +10,23 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    if request.method == 'POST': 
-        note = request.form.get('note')#Gets the note from the HTML 
-
-        if len(note) < 1:
-            flash('Note is too short!', category='error') 
+    if request.method == 'POST':
+        note = request.form.get('note')
+        weight = request.form.get('weight')
+        if note and len(note) < 1:
+            flash('Note is too short!', category='error')
+        elif weight and len(weight) < 1:
+            flash('Weight is required!', category='error')
         else:
-            new_note = Note(data=note, user_id=current_user.id)  #providing the schema for the note 
-            db.session.add(new_note) #adding the note to the database 
+            if note:
+                new_note = Note(data=note, user_id=current_user.id)
+                db.session.add(new_note)
+            if weight:
+                new_weight = Weight(weight_data=weight, user_id=current_user.id)
+                db.session.add(new_weight)
             db.session.commit()
-            flash('Note added!', category='success')
-
+            flash('Information added!', category='success')
     return render_template("home.html", user=current_user)
-
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
