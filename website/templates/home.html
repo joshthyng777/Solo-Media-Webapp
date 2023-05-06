@@ -22,17 +22,17 @@
 
 <!--Code below seperates the weight column, from the gaol section-->
 
-  <h2 align="center">Weight</h2>
+<h2 align="center">Weight</h2>
   <ul class="list-group list-group-flush" id="weight">
-    {% for nums in user.weight %}
-      <li class="list-group-item">{{ nums.weight_data }} ({{ nums.weight_date.strftime('%m/%d/%Y') }})</li>
+    {% for weight in user.weights %}
+      <li class="list-group-item">{{ weight.weight_data }} ({{ weight.weight_date.strftime('%m/%d/%Y') }})</li>
     {% endfor %}
   </ul>
   <form method="POST">
     <input type="text" name="weight_data" placeholder="Enter an exercise...">
     <input type="number" name="weight_lifted" placeholder="Enter weight lifted...">
-    <button type="submit" name="submit">Add</button>
-</form>
+    <button type="submit">Add</button>
+  </form>
 {% endblock %}
 
 
