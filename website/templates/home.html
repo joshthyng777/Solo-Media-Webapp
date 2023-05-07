@@ -1,38 +1,100 @@
-{% extends "base.html" %}
-{% block title %}Fitness Buddy Home{% endblock %}
-{% block content %}
-  <h1 align="center">Goal List</h1>
-  <ul class="list-group list-group-flush" id="notes">
-    {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-    {% endfor %}
-  </ul>
-  <form method="POST">
-    <textarea name="note_data" id="note_data" class="form-control"></textarea>
-    <br />
-    <div align="center">
-      <button type="submit" class="btn btn-primary">Add Note</button>
-    </div>
-  </form>
+{% extends "base.html" %} {% block title %}Fitness Buddy Home{% endblock %} {%
+block content %}
+<h1 align="center">Goal List</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes %}
+  <li class="list-group-item">
+    {{ note.data }}
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+<form method="POST">
+  <textarea name="note_data" id="note_data" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </div>
+</form>
 
 <!-- Code below seperates the weight column, from the gaol section -->
 
-<h2 align="center">Weight</h2>
-  <ul class="list-group list-group-flush" id="weight">
-    {% for weight in user.weights %}
-      <li class="list-group-item">{{ weight.weight_data }} ({{ weight.weight_date.strftime('%m/%d/%Y') }})</li>
-    {% endfor %}
-  </ul>
-  <form method="POST">
-    <input type="text" name="weight_data" placeholder="Enter an exercise...">
-    <input type="number" name="weight_lifted" placeholder="Enter weight lifted...">
-    <button type="submit">Add</button>
+<div>
+  <h2>Exercise Tracker</h2>
+  <form>
+    <label for="exercise-select">Select an exercise:</label>
+    <div>
+      <input
+        type="text"
+        id="search-exercise"
+        placeholder="Search for exercise..."
+      />
+      <select id="exercise-select" name="exercise">
+        <option value="" selected disabled hidden>Choose an exercise</option>
+        <option value="squat">Squat</option>
+        <option value="bench-press">Bench Press</option>
+        <option value="deadlift">Deadlift</option>
+        <option value="squat">Squat</option>
+        <option value="bench-press">Bench Press</option>
+        <option value="deadlift">Deadlift</option>
+        <option value="overhead-press">Overhead Press</option>
+        <option value="barbell-row">Barbell Row</option>
+        <option value="pull-up">Pull-up</option>
+        <option value="push-up">Push-up</option>
+        <option value="dumbbell-bench-press">Dumbbell Bench Press</option>
+        <option value="dumbbell-row">Dumbbell Row</option>
+        <option value="lunges">Lunges</option>
+        <option value="leg-press">Leg Press</option>
+        <option value="calf-raise">Calf Raise</option>
+        <option value="leg-curl">Leg Curl</option>
+        <option value="leg-extension">Leg Extension</option>
+        <option value="crunches">Crunches</option>
+        <option value="sit-ups">Sit-ups</option>
+        <option value="plank">Plank</option>
+        <option value="flutter-kicks">Flutter Kicks</option>
+        <option value="mountain-climbers">Mountain Climbers</option>
+        <option value="burpees">Burpees</option>
+        <option value="jumping-jacks">Jumping Jacks</option>
+        <option value="box-jumps">Box Jumps</option>
+        <option value="rope-jumping">Rope Jumping</option>
+        <option value="running">Running</option>
+        <option value="cycling">Cycling</option>
+        <option value="swimming">Swimming</option>
+        <option value="rowing">Rowing</option>
+      </select>
+    </div>
+    <div>
+      <label for="weight-input">Weight:</label>
+      <input
+        type="number"
+        id="weight-input"
+        name="weight"
+        placeholder="Enter weight lifted in lbs"
+      />
+    </div>
+    <div>
+      <label for="sets-input">Sets:</label>
+      <input
+        type="number"
+        id="sets-input"
+        name="sets"
+        placeholder="Enter number of sets"
+      />
+    </div>
+    <div>
+      <label for="reps-input">Reps:</label>
+      <input
+        type="number"
+        id="reps-input"
+        name="reps"
+        placeholder="Enter number of reps"
+      />
+    </div>
+    <button type="submit">Save</button>
   </form>
+</div>
+<script scr="index.js"></script>
+
 {% endblock %}
-
-
