@@ -23,5 +23,3 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note') #This sets a relationship between user and note
     weight = db.relationship('Weight')
-
-    
