@@ -1,5 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template_string
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+from flask_wtf.csrf import generate_csrf
 from os import path
 from flask_login import LoginManager
 
@@ -39,3 +41,17 @@ def create_database(app):
     if not path.exists('website/' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')
+
+# trying to define the api route for axios on the front end but am not sure how just yet
+# Was thinking of creating a different file for it called routes.py but figured i'd hold off on that for now
+# @app.route('/api/data', methods=['GET'])
+# def get_data():
+    # Handle the GET request and return the response
+    # data = {
+     #   'message': 'Hello from the backend!',
+     #   'data': [1, 2, 3, 4, 5]
+   # }
+    #return jsonify(data)
+
+if __name__ == '__main__':
+    app.run()
